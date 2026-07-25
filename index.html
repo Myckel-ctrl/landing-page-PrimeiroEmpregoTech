@@ -164,12 +164,6 @@
 
     <div class="product-carousel-wrapper">
 
-      <button class="prod-nav-btn prev" id="prodPrev" aria-label="Anterior">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-      </button>
-
       <div class="product-grid">
 
         <div class="product-card" data-c="gold">
@@ -318,12 +312,6 @@
 
       </div>
 
-      <button class="prod-nav-btn next" id="prodNext" aria-label="Próximo">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      </button>
-
     </div>
 
     <div class="product-dots" id="productDots"></div>
@@ -385,9 +373,16 @@
 <section class="section-pad" id="oferta">
   <div class="container">
 
-    <div class="section-head">
-      <h2>SEU PASSAPORTE PARA O MERCADO DE TECNOLOGIA POR UM VALOR SIMBÓLICO</h2>
+    <div class="urgency-banner">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="12 6 12 12 16 14"></polyline>
+      </svg>
+      <span>Condição especial por tempo limitado &mdash; expira em <span id="countdown">15:00</span></span>
+    </div>
 
+    <div class="section-head">
+      <h2>O caminho estruturado para sua primeira vaga em tech</h2>
       <p class="desc">
         Garanta o kit completo com todos os guias, checklists e bônus pelo preço de um lanche.
       </p>
@@ -403,87 +398,99 @@
         >
       </div>
 
-
       <div class="offer-card">
 
-        <div class="offer-list-header">
-          <h3>Tudo o que você vai receber hoje:</h3>
+        <div class="offer-left-col">
+          <div class="offer-list-header">
+            <h3>Tudo o que você vai receber hoje:</h3>
+          </div>
+
+          <ul class="offer-list">
+
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>
+                <strong>Guia Principal Definitivo</strong>
+                <small>Direcionamento estratégico para parar de estudar no escuro.</small>
+              </span>
+            </li>
+
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>
+                <strong>Otimização de LinkedIn + Currículo</strong>
+                <small>Deixe seu perfil atraente e passe nos filtros ATS.</small>
+              </span>
+            </li>
+
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>
+                <strong>Auditoria de GitHub + Projetos</strong>
+                <small>Mostre maturidade técnica nos seus repositórios.</small>
+              </span>
+            </li>
+
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>
+                <strong>Banco de Perguntas de Entrevistas</strong>
+                <small>Treine com respostas testadas para etapas técnicas e comportamentais.</small>
+              </span>
+            </li>
+
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>
+                <strong>Plano de Ação de 30 Dias</strong>
+                <small>Meta diária executável para conquistar entrevistas rapidamente.</small>
+              </span>
+            </li>
+
+            <li class="bonus-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>
+                <strong>🎁 Bônus: Planilha de Gestão de Candidaturas</strong>
+                <small>Controle e clareza sobre todas as suas aplicações.</small>
+              </span>
+            </li>
+
+            <li class="bonus-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>
+                <strong>🎁 Bônus: Template de Currículo Editável</strong>
+                <small>Modelo pronto, testado e aprovado por recrutadores.</small>
+              </span>
+            </li>
+
+          </ul>
+
+          <div class="value-stack">
+            <div class="value-row"><span>Guia Principal Definitivo</span><span>R$ 27</span></div>
+            <div class="value-row"><span>Otimização de LinkedIn + Currículo</span><span>R$ 19</span></div>
+            <div class="value-row"><span>Auditoria de GitHub + Projetos</span><span>R$ 17</span></div>
+            <div class="value-row"><span>Banco de Perguntas de Entrevistas</span><span>R$ 15</span></div>
+            <div class="value-row"><span>Plano de Ação de 30 Dias</span><span>R$ 19</span></div>
+            <div class="value-row bonus"><span>🎁 Planilha de Gestão de Candidaturas</span><span>Grátis hoje</span></div>
+            <div class="value-row bonus"><span>🎁 Template de Currículo Editável</span><span>Grátis hoje</span></div>
+            <div class="value-row total"><span>Valor total do kit</span><span>R$ 97</span></div>
+          </div>
+
         </div>
-
-        <ul class="offer-list">
-
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            <span>
-              <strong>Guia Principal Definitivo</strong>
-              <small>Direcionamento estratégico para parar de estudar no escuro.</small>
-            </span>
-          </li>
-
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            <span>
-              <strong>Otimização de LinkedIn + Currículo</strong>
-              <small>Deixe seu perfil atraente e passe nos filtros ATS.</small>
-            </span>
-          </li>
-
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            <span>
-              <strong>Auditoria de GitHub + Projetos</strong>
-              <small>Mostre maturidade técnica nos seus repositórios.</small>
-            </span>
-          </li>
-
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            <span>
-              <strong>Banco de Perguntas de Entrevistas</strong>
-              <small>Treine com respostas testadas para etapas técnicas e comportamentais.</small>
-            </span>
-          </li>
-
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            <span>
-              <strong>Plano de Ação de 30 Dias</strong>
-              <small>Meta diária executável para conquistar entrevistas rapidamente.</small>
-            </span>
-          </li>
-
-          <li class="bonus-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            <span>
-              <strong>🎁 Bônus: Planilha de Gestão de Candidaturas</strong>
-              <small>Controle e clareza sobre todas as suas aplicações.</small>
-            </span>
-          </li>
-
-          <li class="bonus-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            <span>
-              <strong>🎁 Bônus: Template de Currículo Editável</strong>
-              <small>Modelo pronto, testado e aprovado por recrutadores.</small>
-            </span>
-          </li>
-
-        </ul>
-
 
         <div class="offer-price-col">
 
@@ -499,6 +506,10 @@
             R$ 26,79
           </span>
 
+          <span class="offer-installment">
+            ou 3x de R$ 8,93 sem juros
+          </span>
+
           <span class="offer-price-note">
             Pagamento único • Sem mensalidades
           </span>
@@ -506,6 +517,17 @@
           <a href="#" class="btn btn-primary btn-lg">
             QUERO GARANTIR MEU KIT AGORA
           </a>
+
+          <div class="guarantee-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <polyline points="9 12 11 14 15 10"></polyline>
+            </svg>
+            <div>
+              <strong>Garantia incondicional de 7 dias</strong>
+              <small>Se o kit não fizer sentido pra você, devolvemos 100% do valor, sem perguntas.</small>
+            </div>
+          </div>
 
           <div class="trust-row">
 
@@ -535,14 +557,29 @@
 
           </div>
 
+          <div class="payment-methods">
+            <span>Pix</span>
+            <span>Visa</span>
+            <span>Mastercard</span>
+            <span>Boleto</span>
+          </div>
+
         </div>
 
       </div>
 
-
       <p class="offer-footer-text">
         O Primeiro Emprego Tech oferece o método e a estrutura necessária para valorizar seu conhecimento e acelerar suas oportunidades de entrevista de forma estratégica.
       </p>
+
+      <div class="offer-second-cta">
+        <a href="#" class="btn btn-primary btn-lg">
+          QUERO GARANTIR MEU KIT AGORA
+        </a>
+        <p class="offer-second-cta-note">
+          🔒 Acesso liberado imediatamente após a confirmação do pagamento • Garantia de 7 dias
+        </p>
+      </div>
 
     </div>
 
@@ -568,19 +605,19 @@
       <div class="feedback-grid">
 
         <div class="feedback-card">
-          <img src="Screenshot (168).png" alt="Depoimento 1" class="feedback-img">
+          <img src="image/depoimento-1.png" alt="Depoimento 1" class="feedback-img">
         </div>
 
         <div class="feedback-card">
-          <img src="depoimento-2.jpg" alt="Depoimento 2" class="feedback-img">
+          <img src="image/depoimento-2.jpg" alt="Depoimento 2" class="feedback-img">
         </div>
 
         <div class="feedback-card">
-          <img src="depoimento-3.jpg" alt="Depoimento 3" class="feedback-img">
+          <img src="image/depoimento-3.jpg" alt="Depoimento 3" class="feedback-img">
         </div>
 
         <div class="feedback-card">
-          <img src="depoimento-4.jpg" alt="Depoimento 4" class="feedback-img">
+          <img src="image/depoimento-4.jpg" alt="Depoimento 4" class="feedback-img">
         </div>
 
       </div>
@@ -642,6 +679,12 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
         <div class="faq-a"><div class="faq-a-inner">Você poderá aplicar o Banco de Perguntas e o guia de entrevistas imediatamente para se preparar melhor para suas próximas reuniões técnicas.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">E se eu não gostar do material?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Você tem 7 dias de garantia incondicional. Se por qualquer motivo o kit não for pra você, é só solicitar o reembolso e devolvemos 100% do valor pago.</div></div>
       </div>
     </div>
 

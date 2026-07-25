@@ -1,203 +1,132 @@
-document.addEventListener('DOMContentLoaded', function(){
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+// =========================================================
+// PRIMEIRO EMPREGO TECH — script.js
+// =========================================================
 
-  /* header scroll */
-  var header = document.getElementById('siteHeader');
-  function onScroll(){
-    if(window.scrollY > 30){ header.classList.add('scrolled'); }
-    else{ header.classList.remove('scrolled'); }
-  }
-  window.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
+document.addEventListener('DOMContentLoaded', function () {
 
-  /* mobile nav */
-  var hamburger = document.getElementById('hamburgerBtn');
-  var mobileNav = document.getElementById('mobileNav');
-  if (hamburger && mobileNav) {
-    hamburger.addEventListener('click', function(){
-      var open = mobileNav.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-    mobileNav.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){ mobileNav.classList.remove('open'); });
-    });
-  }
+  /* ---------- Carrossel genérico (produtos e depoimentos) ---------- */
+  function initCarousel(config) {
+    var track = document.querySelector(config.track);
+    var prevBtn = document.getElementById(config.prevId);
+    var nextBtn = document.getElementById(config.nextId);
+    var dotsWrap = document.getElementById(config.dotsId);
 
-  /* reveal on scroll (atualizado com os cards de feedback) */
-  var revealTargets = document.querySelectorAll('.pain-step, .pain-solution-banner, .product-card, .feedback-card');
-  if(reduced || !('IntersectionObserver' in window)){
-    revealTargets.forEach(function(el){ el.classList.add('reveal'); });
-  } else {
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          entry.target.classList.add('reveal');
-          io.unobserve(entry.target);
-        }
+    if (!track || !prevBtn || !nextBtn || !dotsWrap) return;
+
+    var items = Array.prototype.slice.call(track.children);
+    if (!items.length) return;
+
+    // gera os dots
+    items.forEach(function (_, i) {
+      var dot = document.createElement('span');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', function () {
+        scrollToIndex(i);
       });
-    }, {threshold:.05});
-    revealTargets.forEach(function(el){ io.observe(el); });
-  }
-
-  /* video modal */
-  var videoModal = document.getElementById('videoModal');
-  var openModalBtn = document.getElementById('openVideoModal');
-  var closeModalBtn = document.getElementById('closeVideoModal');
-
-  if(openModalBtn && videoModal){
-    openModalBtn.addEventListener('click', function(){
-      videoModal.classList.add('open');
+      dotsWrap.appendChild(dot);
     });
-  }
-  if(closeModalBtn && videoModal){
-    closeModalBtn.addEventListener('click', function(){
-      videoModal.classList.remove('open');
-    });
-  }
-  if(videoModal){
-    videoModal.addEventListener('click', function(e){
-      if(e.target === videoModal){ videoModal.classList.remove('open'); }
-    });
-  }
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape' && videoModal){ videoModal.classList.remove('open'); }
-  });
 
-  /* faq accordion */
-  var faqItems = document.querySelectorAll('.faq-item');
-  faqItems.forEach(function(item){
-    var q = item.querySelector('.faq-q');
-    var a = item.querySelector('.faq-a');
-    if(q && a){
-      q.addEventListener('click', function(){
-        var isOpen = item.classList.contains('open');
-        faqItems.forEach(function(other){
-          other.classList.remove('open');
-          var otherA = other.querySelector('.faq-a');
-          if(otherA) otherA.style.maxHeight = null;
-        });
-        if(!isOpen){
-          item.classList.add('open');
-          a.style.maxHeight = a.scrollHeight + 'px';
-        }
+    var dots = Array.prototype.slice.call(dotsWrap.children);
+
+    function itemWidth() {
+      var style = window.getComputedStyle(track);
+      var gap = parseFloat(style.columnGap || style.gap || 0);
+      return items[0].getBoundingClientRect().width + gap;
+    }
+
+    function currentIndex() {
+      return Math.round(track.scrollLeft / itemWidth());
+    }
+
+    function updateDots() {
+      var idx = Math.min(currentIndex(), dots.length - 1);
+      dots.forEach(function (d, i) {
+        d.classList.toggle('active', i === idx);
       });
     }
+
+    function scrollToIndex(i) {
+      var clamped = Math.max(0, Math.min(i, items.length - 1));
+      track.scrollTo({ left: clamped * itemWidth(), behavior: 'smooth' });
+    }
+
+    prevBtn.addEventListener('click', function () {
+      scrollToIndex(currentIndex() - 1);
+    });
+
+    nextBtn.addEventListener('click', function () {
+      scrollToIndex(currentIndex() + 1);
+    });
+
+    track.addEventListener('scroll', function () {
+      window.requestAnimationFrame(updateDots);
+    });
+  }
+
+  initCarousel({
+    track: '.product-grid',
+    prevId: 'prodPrev',
+    nextId: 'prodNext',
+    dotsId: 'productDots'
   });
 
-  /* CONTROLE DAS BOLINHAS DOS PRODUTOS (CARROSSEL) */
-  var productGrid = document.querySelector('.product-grid');
-  var productCards = document.querySelectorAll('.product-card');
-  var productDotsWrap = document.getElementById('productDots');
+  initCarousel({
+    track: '.feedback-grid',
+    prevId: 'feedPrev',
+    nextId: 'feedNext',
+    dotsId: 'feedDots'
+  });
 
-  if (productGrid && productDotsWrap && productCards.length > 0) {
-    productCards.forEach(function(_, index) {
-      var dot = document.createElement('button');
-      dot.className = 'product-dot' + (index === 0 ? ' active' : '');
-      dot.setAttribute('aria-label', 'Ir para o card ' + (index + 1));
-      
-      dot.addEventListener('click', function() {
-        productCards[index].scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'center'
-        });
-      });
+  /* ---------- FAQ accordion ---------- */
+  var faqItems = document.querySelectorAll('.faq-item');
 
-      productDotsWrap.appendChild(dot);
-    });
+  faqItems.forEach(function (item) {
+    var question = item.querySelector('.faq-q');
+    var answer = item.querySelector('.faq-a');
+    var inner = item.querySelector('.faq-a-inner');
 
-    var productDots = productDotsWrap.querySelectorAll('.product-dot');
+    question.addEventListener('click', function () {
+      var isOpen = item.classList.contains('open');
 
-    var productObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          var cardIndex = Array.from(productCards).indexOf(entry.target);
-          if (cardIndex !== -1) {
-            productDots.forEach(function(dot, i) {
-              dot.classList.toggle('active', i === cardIndex);
-            });
-          }
+      // fecha os outros itens abertos
+      faqItems.forEach(function (other) {
+        if (other !== item) {
+          other.classList.remove('open');
+          other.querySelector('.faq-a').style.maxHeight = null;
         }
       });
-    }, {
-      root: productGrid,
-      threshold: 0.6
+
+      if (isOpen) {
+        item.classList.remove('open');
+        answer.style.maxHeight = null;
+      } else {
+        item.classList.add('open');
+        answer.style.maxHeight = inner.scrollHeight + 'px';
+      }
     });
+  });
 
-    productCards.forEach(function(card) {
-      productObserver.observe(card);
-    });
-  }
+  /* ---------- Contador de urgência (reinicia a cada carregamento) ---------- */
+  var countdownEl = document.getElementById('countdown');
 
-  /* BOTÕES DE NAVEGAÇÃO DOS PRODUTOS NO COMPUTADOR */
-  var btnPrev = document.getElementById('prodPrev');
-  var btnNext = document.getElementById('prodNext');
+  if (countdownEl) {
+    var timer = 15 * 60; // 15 minutos
 
-  if (btnPrev && btnNext && productGrid) {
-    btnNext.addEventListener('click', function() {
-      productGrid.scrollBy({ left: 342, behavior: 'smooth' });
-    });
+    function tick() {
+      var minutes = Math.floor(timer / 60);
+      var seconds = timer % 60;
+      countdownEl.textContent =
+        String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
 
-    btnPrev.addEventListener('click', function() {
-      productGrid.scrollBy({ left: -342, behavior: 'smooth' });
-    });
-  }
+      if (timer > 0) {
+        timer--;
+      } else {
+        timer = 15 * 60;
+      }
+    }
 
-  /* CONTROLE DO CARROSSEL DE FEEDBACK (PADRÃO PRODUTO) */
-  var feedGrid = document.querySelector('.feedback-grid');
-  var feedCards = document.querySelectorAll('.feedback-card');
-  var feedDotsWrap = document.getElementById('feedDots');
-  var btnFeedPrev = document.getElementById('feedPrev');
-  var btnFeedNext = document.getElementById('feedNext');
-
-  if (btnFeedPrev && btnFeedNext && feedGrid) {
-    btnFeedNext.addEventListener('click', function() {
-      feedGrid.scrollBy({ left: 340, behavior: 'smooth' });
-    });
-
-    btnFeedPrev.addEventListener('click', function() {
-      feedGrid.scrollBy({ left: -340, behavior: 'smooth' });
-    });
-  }
-
-  if (feedGrid && feedDotsWrap && feedCards.length > 0) {
-    feedCards.forEach(function(_, index) {
-      var dot = document.createElement('button');
-      dot.className = 'product-dot' + (index === 0 ? ' active' : '');
-      dot.setAttribute('aria-label', 'Ir para o depoimento ' + (index + 1));
-
-      dot.addEventListener('click', function() {
-        feedCards[index].scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'center'
-        });
-      });
-
-      feedDotsWrap.appendChild(dot);
-    });
-
-    var feedDots = feedDotsWrap.querySelectorAll('.product-dot');
-
-    var feedObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          var cardIndex = Array.from(feedCards).indexOf(entry.target);
-          if (cardIndex !== -1) {
-            feedDots.forEach(function(dot, i) {
-              dot.classList.toggle('active', i === cardIndex);
-            });
-          }
-        }
-      });
-    }, {
-      root: feedGrid,
-      threshold: 0.6
-    });
-
-    feedCards.forEach(function(card) {
-      feedObserver.observe(card);
-    });
+    tick();
+    setInterval(tick, 1000);
   }
 
 });
