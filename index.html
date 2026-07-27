@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Primeiro Emprego Tech | O Método Definitivo para sua Primeira Vaga</title>
-<meta name="description" content="Transforme seus estudos em tecnologia em um portfólio estratégico, currículo ATS e perfil no LinkedIn prontos para contratar.">
+<meta name="description" content="Transforme seus estudos em programação em um portfólio estratégico, currículo ATS e perfil no LinkedIn prontos para contratar.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -35,12 +35,12 @@
   <div class="container hero-grid">
     
     <div>
-      <h1>SEJA NOTADO PELOS RECRUTADORES</h1>
+<h1>SEJA NOTADO PELOS RECRUTADORES</h1>
 
-      <p class="sub">
-        <strong>Transforme o conhecimento que você já possui em evidências que atraem entrevistas.</strong>
-        Um método prático para alinhar seu LinkedIn, GitHub, Currículo e postura técnica sem enrolação.
-      </p>
+<p class="sub">
+  <strong>Seu conhecimento técnico já existe.</strong>
+  O que falta é transformá-lo em evidências que possam chamar atenção dos recrutadores no LinkedIn, currículo e GitHub.
+</p>
 
       <div class="hero-ctas">
         <a href="#oferta" class="btn btn-primary btn-lg">
@@ -48,16 +48,25 @@
         </a>
       </div>
       <p class="urgent-text">
-        Feito para quem já estuda tecnologia e quer transformar teoria em contratação.
+        Feito para quem já estuda programação e quer transformar teoria em contratação.
       </p>
     </div>
 
     <div class="hero-image-wrap">
       <div class="hero-image-glow"></div>
-      <img 
-        src="image/kit-produto.png" 
-        alt="Kit Primeiro Emprego Tech com materiais para currículo, LinkedIn, GitHub, projetos e preparação para entrevistas"
-      >
+      <!-- Troque o src do <video> abaixo pelo caminho do seu vídeo quando estiver pronto -->
+      <div class="hero-video" id="heroVideo" data-video-src="video/apresentacao.mp4">
+        <img
+          src="image/kit-produto.png"
+          alt="Prévia do vídeo mostrando o Kit Primeiro Emprego Tech por dentro"
+          class="hero-video-thumb"
+        >
+        <button class="hero-video-play" id="heroVideoPlay" type="button" aria-label="Assistir vídeo de apresentação">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="9 6 20 12 9 18 9 6"></polygon>
+          </svg>
+        </button>
+      </div>
     </div>
 
   </div>
@@ -127,11 +136,9 @@
         </div>
 
         <div class="pain-text">
-          <h3>Seu GitHub não transmite maturidade técnica</h3>
+          <h3>Seu GitHub não passa a imagem de um programador experiente</h3>
 
-          <p>
-            Projetos sem documentação README, commits confusos e repositórios sem aplicação prática impedem que os recrutadores vejam do que você 
-            realmente é capaz.
+          <p>Commits desorganizados, projetos sem README e repositórios sem boas práticas de código impedem que os recrutadores vejam sua real capacidade como programador.
           </p>
         </div>
       </div>
@@ -165,9 +172,8 @@
 
       <div class="benefit-card">
         <div class="benefit-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-            <circle cx="12" cy="12" r="3"></circle>
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM7.114 20.452H3.558V9h3.556v11.452z"></path>
           </svg>
         </div>
         <h3>Ser visto pelos recrutadores</h3>
@@ -188,13 +194,12 @@
 
       <div class="benefit-card">
         <div class="benefit-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="16 18 22 12 16 6"></polyline>
-            <polyline points="8 6 2 12 8 18"></polyline>
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
           </svg>
         </div>
-        <h3>Provar maturidade técnica</h3>
-        <p>Seu GitHub deixa de ser só um repositório de exercícios e passa a mostrar organização, documentação e projetos aplicáveis.</p>
+<h3>Provar que você programa bem</h3>
+<p>Seu GitHub deixa de ser só um repositório de exercícios e passa a mostrar organização, boas práticas de código e projetos que qualquer recrutador técnico reconhece.</p>
       </div>
 
       <div class="benefit-card">
@@ -223,7 +228,7 @@
       <h2>APRESENTAMOS A MÁQUINA DE CONTRATAÇÃO: TUDO O QUE VOCÊ PRECISA EM UM SÓ LUGAR</h2>
 
       <p class="desc">
-        O Primeiro Emprego Tech foi desenvolvido para eliminar a incerteza e te dar um roteiro passo a passo do que fazer em cada canal de recrutamento.
+        O Primeiro Emprego Tech foi desenvolvido para eliminar a incerteza e te dar um roteiro passo a passo do que fazer em cada canal de recrutamento, seja qual for sua stack (back-end, front-end ou fullstack).
       </p>
     </div>
 
@@ -326,7 +331,7 @@
           <h3>Banco de Perguntas para Entrevistas</h3>
 
           <p class="desc">
-            Chegue confiante para as etapas técnicas e comportamentais sabendo exatamente o que respondem os contratados.
+            Chegue confiante para as etapas de lógica, estruturas de dados e sua stack, além das perguntas comportamentais mais cobradas em processos de programação.
           </p>
 
           <ul>
@@ -334,7 +339,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
-              +100 perguntas técnicas por área explicadas
+              +100 perguntas de lógica, estruturas de dados e programação explicadas
             </li>
 
             <li>
@@ -378,9 +383,6 @@
       </div>
 
     </div>
-
-    <div class="product-dots" id="productDots"></div>
-
 
     <div class="bonus-box-wrapper">
 
@@ -443,7 +445,7 @@
         <circle cx="12" cy="12" r="10"></circle>
         <polyline points="12 6 12 12 16 14"></polyline>
       </svg>
-      <span>Condição especial por tempo limitado, expira em <span id="countdown">15:00</span></span>
+      <span>Condição especial por tempo limitado, expira em <span class="js-countdown" id="countdown">15:00</span></span>
     </div>
 
     <div class="section-head">
@@ -508,7 +510,7 @@
               </svg>
               <span>
                 <strong>Banco de Perguntas de Entrevistas</strong>
-                <small>Treine com respostas testadas para etapas técnicas e comportamentais.</small>
+                <small>Treine com respostas testadas para etapas técnicas de programação e comportamentais.</small>
               </span>
             </li>
 
@@ -557,6 +559,13 @@
               <span>Hoje, por tempo limitado</span>
               <span>R$ 26,79</span>
             </div>
+            <div class="value-countdown">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <span>Essa condição expira em <strong class="js-countdown">15:00</strong></span>
+            </div>
           </div>
 
         </div>
@@ -591,7 +600,7 @@
             Pagamento único • Sem mensalidades
           </span>
 
-          <a href="#" class="btn btn-primary btn-lg">
+          <a href="#" class="btn btn-primary btn-lg buy-btn">
             QUERO GARANTIR MEU KIT AGORA
           </a>
 
@@ -601,7 +610,7 @@
               <polyline points="9 12 11 14 15 10"></polyline>
             </svg>
             <div>
-              <strong>Garantia incondicional de 7 dias</strong>
+              <strong>Garantia de 7 dias</strong>
               <small>Se o kit não fizer sentido pra você, devolvemos 100% do valor, sem perguntas.</small>
             </div>
           </div>
@@ -650,7 +659,7 @@
       </p>
 
       <div class="offer-second-cta">
-        <a href="#" class="btn btn-primary btn-lg">
+        <a href="#" class="btn btn-primary btn-lg buy-btn">
           QUERO GARANTIR MEU KIT AGORA
         </a>
         <p class="offer-second-cta-note">
@@ -725,13 +734,13 @@
         <button class="faq-q">Para quem é recomendado este kit?
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
-        <div class="faq-a"><div class="faq-a-inner">Para quem estuda tecnologia (seja autodidata, de faculdade ou bootcamp) e precisa transformar teoria em uma candidatura estruturada para conquistar a primeira vaga.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Para quem estuda programação (seja autodidata, de faculdade ou bootcamp) e precisa transformar teoria em uma candidatura estruturada para conquistar a primeira vaga como desenvolvedor.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q">Preciso ter experiência prévia na área?
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
-        <div class="faq-a"><div class="faq-a-inner">Não. Todo o kit foi formulado exatamente para quem busca o primeiro emprego formal em tech, ensinando a usar seus projetos de estudo como evidência prática.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Não. Todo o kit foi formulado exatamente para quem busca o primeiro emprego formal como programador, ensinando a usar seus projetos de estudo como evidência prática.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q">Como receberei o acesso aos materiais?
@@ -781,7 +790,7 @@
           <span class="logo-tag">&lt;/&gt;</span>
           <span class="logo-name">Primeiro Emprego <span>Tech</span></span>
         </a>
-        <p class="footer-desc">Sistema estratégico para quem estuda tecnologia e deseja conquistar a primeira oportunidade no mercado.</p>
+        <p class="footer-desc">Sistema estratégico para programadores que querem conquistar a primeira oportunidade no mercado.</p>
       </div>
       <nav class="footer-nav">
         <a href="#kit">O Kit</a>

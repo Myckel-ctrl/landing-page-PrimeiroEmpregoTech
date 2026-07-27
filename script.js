@@ -114,16 +114,23 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   /* ---------- Contador de urgência (reinicia a cada carregamento) ---------- */
-  var countdownEl = document.getElementById('countdown');
+  // Atualiza TODOS os elementos com a classe .js-countdown ao mesmo tempo,
+  // para que o cronômetro do banner e o de dentro da oferta fiquem sempre
+  // sincronizados, mostrando o mesmo tempo restante.
+  var countdownEls = document.querySelectorAll('.js-countdown');
 
-  if (countdownEl) {
+  if (countdownEls.length) {
     var timer = 15 * 60; // 15 minutos
 
     function tick() {
       var minutes = Math.floor(timer / 60);
       var seconds = timer % 60;
-      countdownEl.textContent =
+      var formatted =
         String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+
+      countdownEls.forEach(function (el) {
+        el.textContent = formatted;
+      });
 
       if (timer > 0) {
         timer--;
@@ -134,6 +141,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
     tick();
     setInterval(tick, 1000);
+  }
+
+  /* ---------- Vídeo do hero (toca só quando a pessoa clica) ---------- */
+  var heroVideo = document.getElementById('heroVideo');
+  var heroVideoPlay = document.getElementById('heroVideoPlay');
+
+  if (heroVideo && heroVideoPlay) {
+    heroVideo.addEventListener('click', function () {
+      var src = heroVideo.getAttribute('data-video-src');
+      if (!src) return;
+
+      var video = document.createElement('video');
+      video.src = src;
+      video.controls = true;
+      video.autoplay = true;
+      video.playsInline = true;
+
+      heroVideo.innerHTML = '';
+      heroVideo.appendChild(video);
+      heroVideo.style.cursor = 'default';
+    });
   }
 
   /* ---------- CTA fixo ao rolar a página ---------- */
@@ -158,12 +186,12 @@ document.addEventListener('DOMContentLoaded', function () {
     var heroObserver = new IntersectionObserver(function (entries) {
       pastHero = !entries[0].isIntersecting;
       updateStickyCta();
-    }, { threshold: 0 });
+    }, { threshold: 0.2 });
 
     var offerObserver = new IntersectionObserver(function (entries) {
       insideOffer = entries[0].isIntersecting;
       updateStickyCta();
-    }, { threshold: 0.15 });
+    }, { threshold: 0.12 });
 
     heroObserver.observe(heroSection);
     offerObserver.observe(offerSection);

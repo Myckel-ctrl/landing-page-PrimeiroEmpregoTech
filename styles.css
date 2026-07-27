@@ -227,6 +227,56 @@ h1, h2, h3{
   border:1px solid var(--border);
 }
 
+.hero-video{
+  position:relative;
+  z-index:1;
+  border-radius:var(--radius-lg);
+  border:1px solid var(--border);
+  overflow:hidden;
+  cursor:pointer;
+}
+
+.hero-video-thumb{
+  width:100%;
+  display:block;
+}
+
+.hero-video video{
+  width:100%;
+  display:block;
+  border-radius:var(--radius-lg);
+}
+
+.hero-video-play{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  border:none;
+  background:rgba(11,13,16,.55);
+  backdrop-filter:blur(4px);
+  color:var(--accent);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:transform .15s ease, background .15s ease;
+}
+
+.hero-video-play svg{
+  width:26px;
+  height:26px;
+  margin-left:3px;
+}
+
+.hero-video-play:hover{
+  transform:translate(-50%, -50%) scale(1.08);
+  background:rgba(11,13,16,.75);
+}
+
 /* ===== DIVIDER ===== */
 
 .divider-section{ padding:0 1.5rem; }
@@ -535,7 +585,7 @@ h1, h2, h3{
 }
 
 .urgency-banner svg{ width:16px; height:16px; flex-shrink:0; color:var(--warn); }
-.urgency-banner #countdown{ color:var(--warn); font-weight:700; }
+.urgency-banner .js-countdown{ color:var(--warn); font-weight:700; }
 
 .offer-wrapper{ position:relative; }
 
@@ -643,6 +693,34 @@ h1, h2, h3{
   color:var(--accent);
 }
 
+/* Cronômetro dentro do resumo de valor, logo abaixo do preço final */
+.value-countdown{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  margin-top:.6rem;
+  padding:.55rem .75rem;
+  border-radius:var(--radius-sm);
+  background:rgba(255,176,32,.1);
+  border:1px solid rgba(255,176,32,.3);
+  font-size:.85rem;
+  color:var(--text-dim);
+  text-align:center;
+}
+
+.value-countdown svg{
+  width:16px; height:16px;
+  flex-shrink:0;
+  color:var(--warn);
+}
+
+.value-countdown .js-countdown{
+  color:var(--warn);
+  font-weight:700;
+  font-family:var(--font-mono);
+}
+/*------------------------------*/
 .offer-price-col{
   display:flex;
   flex-direction:column;
