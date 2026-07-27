@@ -292,6 +292,53 @@ h1, h2, h3{
   color:var(--text);
 }
 
+/* ===== BENEFÍCIOS ===== */
+
+.benefits-grid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:1.25rem;
+}
+
+.benefit-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  padding:1.5rem;
+  text-align:left;
+  transition:transform .15s ease, border-color .15s ease;
+}
+
+.benefit-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--accent);
+}
+
+.benefit-icon{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(61,220,151,.12);
+  color:var(--accent);
+  margin-bottom:1rem;
+}
+
+.benefit-icon svg{ width:22px; height:22px; }
+
+.benefit-card h3{
+  font-size:1.02rem;
+  margin-bottom:.4rem;
+}
+
+.benefit-card p{
+  font-size:.88rem;
+  color:var(--text-dim);
+  margin:0;
+}
+
 /* ===== PRODUCT CAROUSEL ===== */
 
 .product-carousel-wrapper{
@@ -865,6 +912,58 @@ footer{
   gap:.4rem;
 }
 
+/* ===== CTA FIXO ===== */
+
+.sticky-cta{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:60;
+  background:rgba(11,13,16,.92);
+  backdrop-filter:blur(10px);
+  border-top:1px solid var(--border);
+  padding:.85rem 1.25rem calc(.85rem + env(safe-area-inset-bottom));
+  transform:translateY(100%);
+  transition:transform .25s ease;
+}
+
+.sticky-cta.visible{ transform:translateY(0); }
+
+.sticky-cta-inner{
+  max-width:1140px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+}
+
+.sticky-cta-price{
+  display:flex;
+  flex-direction:column;
+  line-height:1.15;
+}
+
+.sticky-cta-old{
+  font-size:.75rem;
+  color:var(--text-faint);
+  text-decoration:line-through;
+}
+
+.sticky-cta-new{
+  font-family:var(--font-display);
+  font-size:1.15rem;
+  font-weight:700;
+  color:var(--accent);
+}
+
+.sticky-cta-btn{
+  padding:.7rem 1.5rem;
+  font-size:.88rem;
+  white-space:nowrap;
+}
+
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 900px){
@@ -873,10 +972,14 @@ footer{
   .pain-item{ grid-template-columns:1fr; }
   .offer-card{ grid-template-columns:1fr; padding:3rem 1.5rem 2rem; }
   .footer-top{ flex-direction:column; }
+  .benefits-grid{ grid-template-columns:repeat(2, 1fr); }
 }
 
 @media (max-width: 560px){
   .section-pad{ padding:3.5rem 0; }
   .main-nav{ display:none; }
   .offer-new-price{ font-size:2.2rem; }
+  .sticky-cta-inner{ gap:.75rem; }
+  .sticky-cta-price{ display:none; }
+  .benefits-grid{ grid-template-columns:1fr; }
 }

@@ -5,13 +5,16 @@
 document.addEventListener('DOMContentLoaded', function () {
 
   /* ---------- Carrossel genérico (produtos e depoimentos) ---------- */
+  // prevId e nextId são opcionais: o carrossel de produtos não tem setas,
+  // só dots e scroll manual. O de depoimentos tem os dois.
   function initCarousel(config) {
     var track = document.querySelector(config.track);
-    var prevBtn = document.getElementById(config.prevId);
-    var nextBtn = document.getElementById(config.nextId);
     var dotsWrap = document.getElementById(config.dotsId);
 
-    if (!track || !prevBtn || !nextBtn || !dotsWrap) return;
+    if (!track || !dotsWrap) return;
+
+    var prevBtn = config.prevId ? document.getElementById(config.prevId) : null;
+    var nextBtn = config.nextId ? document.getElementById(config.nextId) : null;
 
     var items = Array.prototype.slice.call(track.children);
     if (!items.length) return;
@@ -50,26 +53,30 @@ document.addEventListener('DOMContentLoaded', function () {
       track.scrollTo({ left: clamped * itemWidth(), behavior: 'smooth' });
     }
 
-    prevBtn.addEventListener('click', function () {
-      scrollToIndex(currentIndex() - 1);
-    });
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function () {
+        scrollToIndex(currentIndex() - 1);
+      });
+    }
 
-    nextBtn.addEventListener('click', function () {
-      scrollToIndex(currentIndex() + 1);
-    });
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function () {
+        scrollToIndex(currentIndex() + 1);
+      });
+    }
 
     track.addEventListener('scroll', function () {
       window.requestAnimationFrame(updateDots);
     });
   }
 
+  // carrossel de produtos: sem setas, só dots e scroll manual
   initCarousel({
     track: '.product-grid',
-    prevId: 'prodPrev',
-    nextId: 'prodNext',
     dotsId: 'productDots'
   });
 
+  // carrossel de depoimentos: com setas
   initCarousel({
     track: '.feedback-grid',
     prevId: 'feedPrev',
@@ -127,6 +134,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
     tick();
     setInterval(tick, 1000);
+  }
+
+  /* ---------- CTA fixo ao rolar a página ---------- */
+  // Aparece depois que a pessoa passa da hero.
+  // Some quando a seção de oferta está visível, já que ali tem os próprios CTAs.
+  var stickyCta = document.getElementById('stickyCta');
+  var heroSection = document.getElementById('top');
+  var offerSection = document.getElementById('oferta');
+
+  if (stickyCta && heroSection && offerSection) {
+    var pastHero = false;
+    var insideOffer = false;
+
+    function updateStickyCta() {
+      if (pastHero && !insideOffer) {
+        stickyCta.classList.add('visible');
+      } else {
+        stickyCta.classList.remove('visible');
+      }
+    }
+
+    var heroObserver = new IntersectionObserver(function (entries) {
+      pastHero = !entries[0].isIntersecting;
+      updateStickyCta();
+    }, { threshold: 0 });
+
+    var offerObserver = new IntersectionObserver(function (entries) {
+      insideOffer = entries[0].isIntersecting;
+      updateStickyCta();
+    }, { threshold: 0.15 });
+
+    heroObserver.observe(heroSection);
+    offerObserver.observe(offerSection);
   }
 
 });
