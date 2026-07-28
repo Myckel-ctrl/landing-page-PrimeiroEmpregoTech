@@ -398,25 +398,45 @@ h3 {
 /* ===== CRENÇA (BELIEF) ===== */
 
 .belief-wrapper {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 1.25rem;
   margin-bottom: 2rem;
 }
 
 .belief-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 1.75rem;
+  padding: 1.5rem;
 }
 
-.belief-card h3 {
+.belief-icon {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  background: rgba(61, 220, 151, .12);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.belief-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.belief-content h3 {
   font-size: 1.05rem;
   color: var(--text);
 }
 
-.belief-card p {
+.belief-content p {
   color: var(--text-dim);
   font-size: .92rem;
   margin: 0;
@@ -448,12 +468,15 @@ h3 {
 /* ===== BENEFÍCIOS ===== */
 
 .benefits-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 1.25rem;
 }
 
 .benefit-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
@@ -468,29 +491,29 @@ h3 {
 }
 
 .benefit-icon {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(61, 220, 151, .12);
   color: var(--accent);
-  margin-bottom: 1rem;
 }
 
 .benefit-icon svg {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
 }
 
-.benefit-card h3 {
-  font-size: 1.02rem;
+.benefit-content h3 {
+  font-size: 1.05rem;
   margin-bottom: .4rem;
 }
 
-.benefit-card p {
-  font-size: .88rem;
+.benefit-content p {
+  font-size: .92rem;
   color: var(--text-dim);
   margin: 0;
 }
@@ -1363,10 +1386,6 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .belief-wrapper {
-    grid-template-columns: 1fr;
-  }
-
   .offer-card {
     grid-template-columns: 1fr;
     padding: 3rem 1.5rem 2rem;
@@ -1374,10 +1393,6 @@ footer {
 
   .footer-top {
     flex-direction: column;
-  }
-
-  .benefits-grid {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -1396,9 +1411,5 @@ footer {
 
   .sticky-cta-inner {
     gap: .75rem;
-  }
-
-  .benefits-grid {
-    grid-template-columns: 1fr;
   }
 }

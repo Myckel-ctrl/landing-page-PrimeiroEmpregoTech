@@ -165,36 +165,49 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* ---------- CTA fixo ao rolar a página ---------- */
-  // Aparece depois que a pessoa passa da hero.
-  // Some quando a seção de oferta está visível, já que ali tem os próprios CTAs.
+  // Aparece depois da hero e SOME na oferta, garantia, faq, final-cta e footer
   var stickyCta = document.getElementById('stickyCta');
   var heroSection = document.getElementById('top');
-  var offerSection = document.getElementById('oferta');
 
-  if (stickyCta && heroSection && offerSection) {
+  // Lista de seletores onde o CTA FIXO NÃO deve aparecer
+  var hiddenSections = document.querySelectorAll('#oferta, #garantia, #faq, .final-cta, footer');
+
+  if (stickyCta && heroSection) {
     var pastHero = false;
-    var insideOffer = false;
+    var isOverHiddenSection = false;
 
     function updateStickyCta() {
-      if (pastHero && !insideOffer) {
+      // Exibe apenas se já passou da Hero E NÃO está em nenhuma seção proibida
+      if (pastHero && !isOverHiddenSection) {
         stickyCta.classList.add('visible');
       } else {
         stickyCta.classList.remove('visible');
       }
     }
 
+    // Monitora a Hero
     var heroObserver = new IntersectionObserver(function (entries) {
       pastHero = !entries[0].isIntersecting;
       updateStickyCta();
     }, { threshold: 0.2 });
 
-    var offerObserver = new IntersectionObserver(function (entries) {
-      insideOffer = entries[0].isIntersecting;
-      updateStickyCta();
-    }, { threshold: 0.12 });
-
     heroObserver.observe(heroSection);
-    offerObserver.observe(offerSection);
+
+    // Monitora todas as seções onde o CTA deve sumir
+    var hiddenObserver = new IntersectionObserver(function (entries) {
+      // Verifica se pelo menos uma das seções está visível na tela
+      var anyVisible = Array.from(hiddenSections).some(function (sec) {
+        var rect = sec.getBoundingClientRect();
+        return rect.top < window.innerHeight && rect.bottom > 0;
+      });
+
+      isOverHiddenSection = anyVisible;
+      updateStickyCta();
+    }, { threshold: 0.05 });
+
+    hiddenSections.forEach(function (section) {
+      hiddenObserver.observe(section);
+    });
   }
 
 });
