@@ -454,6 +454,20 @@ h3 {
   border: 1px solid rgba(61, 220, 151, .3);
   border-radius: var(--radius-md);
   padding: 2rem;
+  margin: 1rem 0; /* Aumentado para dar o afastamento igual à seção de dor */
+}
+
+.belief-highlight h3 {
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  margin-bottom: 1rem;
+}
+
+.belief-highlight p {
+  color: var(--text);
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
 }
 
 /* ===== PRODUCT ===== */
@@ -506,8 +520,16 @@ h3 {
   position: relative;
   transition: transform .15s ease, border-color .15s ease;
   width: 100%;
-  max-width: 320px;
+
   margin: 0 auto;
+}
+
+.product-card .product-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1rem;
 }
 
 .product-card:hover {
