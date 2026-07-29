@@ -70,13 +70,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // carrossel de produtos: sem setas, só dots e scroll manual
-  initCarousel({
-    track: '.product-grid',
-    dotsId: 'productDots'
-  });
 
-  // carrossel de depoimentos: com setas
+
+  // carrossel de depoimentos
   initCarousel({
     track: '.feedback-grid',
     prevId: 'feedPrev',
@@ -105,9 +101,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (isOpen) {
         item.classList.remove('open');
+        question.setAttribute('aria-expanded', 'false');
         answer.style.maxHeight = null;
       } else {
         item.classList.add('open');
+        question.setAttribute('aria-expanded', 'true');
         answer.style.maxHeight = inner.scrollHeight + 'px';
       }
     });
@@ -120,13 +118,25 @@ document.addEventListener('DOMContentLoaded', function () {
   var countdownEls = document.querySelectorAll('.js-countdown');
 
   if (countdownEls.length) {
-    var timer = 15 * 60; // 15 minutos
+    var STORAGE_KEY = 'primeiro_emprego_timer';
+    var DURATION = 15 * 60; // 15 minutos
+
+    function getInitialTimer() {
+      var saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        var diff = Math.floor((Date.now() - parseInt(saved)) / 1000);
+        if (diff < DURATION) return DURATION - diff;
+      }
+      localStorage.setItem(STORAGE_KEY, Date.now().toString());
+      return DURATION;
+    }
+
+    var timer = getInitialTimer();
 
     function tick() {
       var minutes = Math.floor(timer / 60);
       var seconds = timer % 60;
-      var formatted =
-        String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+      var formatted = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
 
       countdownEls.forEach(function (el) {
         el.textContent = formatted;
@@ -135,12 +145,35 @@ document.addEventListener('DOMContentLoaded', function () {
       if (timer > 0) {
         timer--;
       } else {
-        timer = 15 * 60;
+        // Reinicia o timer ao chegar em zero
+        timer = DURATION;
+        localStorage.setItem(STORAGE_KEY, Date.now().toString());
       }
     }
 
     tick();
     setInterval(tick, 1000);
+  }
+
+  /* ---------- Animações de Scroll Reveal ---------- */
+  var reveals = document.querySelectorAll('.reveal');
+
+  if (reveals.length) {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          // Para de observar depois que animou
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15 // Começa a animar quando 15% do elemento estiver visível
+    });
+
+    reveals.forEach(function (el) {
+      revealObserver.observe(el);
+    });
   }
 
   /* ---------- Vídeo do hero (toca só quando a pessoa clica) ---------- */
