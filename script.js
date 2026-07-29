@@ -156,6 +156,10 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* ---------- Animações de Scroll Reveal ---------- */
+  // Depois que o elemento aparece, paramos de observá-lo (unobserve).
+  // Sem isso, o observer continua rodando pra sempre em TODO elemento .reveal
+  // da página (dezenas deles), o que pesa a rolagem e atrasa a percepção
+  // de carregamento das imagens que vêm logo depois na página.
   var reveals = document.querySelectorAll('.reveal');
 
   if (reveals.length) {
@@ -163,12 +167,12 @@ document.addEventListener('DOMContentLoaded', function () {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
-          // Para de observar depois que animou
           revealObserver.unobserve(entry.target);
         }
       });
     }, {
-      threshold: 0.15 // Começa a animar quando 15% do elemento estiver visível
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
     });
 
     reveals.forEach(function (el) {
