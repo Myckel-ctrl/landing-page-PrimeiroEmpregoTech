@@ -14,11 +14,24 @@
     rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 
+  <!-- Fallback: se o JavaScript não carregar por algum motivo, o script.js nunca
+       adiciona a classe .active nos elementos .reveal, e eles ficariam com
+       opacity:0 para sempre (invisíveis). Isso garante que o conteúdo apareça
+       mesmo sem JS. -->
+  <noscript>
+    <style>
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    </style>
+  </noscript>
+
   <!-- Open Graph / Social Media -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Primeiro Emprego Tech | O Método Definitivo">
   <meta property="og:description" content="Transforme seus estudos em um perfil profissional que atrai recrutadores.">
-  <meta property="og:image" content="image/kit-produto.png">
+  <meta property="og:image" content="image/livrosOferta.png">
   <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -77,26 +90,14 @@
 
       </div>
 
-      <!-- VÍDEO -->
+      <!-- IMAGEM -->
 
       <div class="hero-image-wrap reveal">
 
         <div class="hero-image-glow"></div>
 
-        <div class="hero-video" id="heroVideo" data-video-src="video/apresentacao.mp4">
-
-          <img src="image/thumb.png" alt="Apresentação do Kit Primeiro Emprego Tech" class="hero-video-thumb"
-            decoding="async">
-
-          <button class="hero-video-play" id="heroVideoPlay" type="button" aria-label="Assistir vídeo">
-
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <polygon points="9 6 20 12 9 18 9 6"></polygon>
-            </svg>
-
-          </button>
-
-        </div>
+        <img src="image/thumb.png" alt="Apresentação do Kit Primeiro Emprego Tech" class="hero-video-thumb"
+          decoding="async">
 
       </div>
 
@@ -216,7 +217,7 @@
       <div class="line"></div>
     </div>
   </div>
-  
+
   <!-- ============ BENEFÍCIOS ============ -->
 
   <section class="section-pad" id="beneficios">
@@ -588,12 +589,6 @@
 
     </div>
   </section>
-
-  <div class="divider-section">
-    <div class="divider">
-      <div class="line"></div>
-    </div>
-  </div>
 
   <!-- ============ DEPOIMENTOS============ -->
 
@@ -991,8 +986,8 @@
 
         <div class="faq-item">
 
-    <button class="faq-q" aria-expanded="false">
-      Esse material serve para quem ainda não conseguiu a primeira vaga?
+          <button class="faq-q" aria-expanded="false">
+            Esse material serve para quem ainda não conseguiu a primeira vaga?
 
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="6 9 12 15 18 9"></polyline>
@@ -1013,8 +1008,8 @@
 
         <div class="faq-item">
 
-    <button class="faq-q" aria-expanded="false">
-      Preciso saber programar muito para aproveitar o conteúdo?
+          <button class="faq-q" aria-expanded="false">
+            Preciso saber programar muito para aproveitar o conteúdo?
 
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="6 9 12 15 18 9"></polyline>
@@ -1035,8 +1030,8 @@
 
         <div class="faq-item">
 
-    <button class="faq-q" aria-expanded="false">
-      Como receberei os materiais?
+          <button class="faq-q" aria-expanded="false">
+            Como receberei os materiais?
 
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="6 9 12 15 18 9"></polyline>
@@ -1057,8 +1052,8 @@
 
         <div class="faq-item">
 
-    <button class="faq-q" aria-expanded="false">
-      O acesso é vitalício?
+          <button class="faq-q" aria-expanded="false">
+            O acesso é vitalício?
 
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="6 9 12 15 18 9"></polyline>
@@ -1078,8 +1073,8 @@
 
         <div class="faq-item">
 
-    <button class="faq-q" aria-expanded="false">
-      Posso fazer o Plano de 30 Dias no meu ritmo?
+          <button class="faq-q" aria-expanded="false">
+            Posso fazer o Plano de 30 Dias no meu ritmo?
 
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="6 9 12 15 18 9"></polyline>
@@ -1100,8 +1095,8 @@
 
         <div class="faq-item">
 
-    <button class="faq-q" aria-expanded="false">
-      O currículo realmente foi pensado para sistemas ATS?
+          <button class="faq-q" aria-expanded="false">
+            O currículo realmente foi pensado para sistemas ATS?
 
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="6 9 12 15 18 9"></polyline>
@@ -1122,8 +1117,8 @@
 
         <div class="faq-item">
 
-    <button class="faq-q" aria-expanded="false">
-      E se eu já estiver participando de processos seletivos?
+          <button class="faq-q" aria-expanded="false">
+            E se eu já estiver participando de processos seletivos?
 
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="6 9 12 15 18 9"></polyline>
@@ -1144,8 +1139,8 @@
 
         <div class="faq-item">
 
-    <button class="faq-q" aria-expanded="false">
-      E se eu comprar e não gostar?
+          <button class="faq-q" aria-expanded="false">
+            E se eu comprar e não gostar?
 
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="6 9 12 15 18 9"></polyline>
