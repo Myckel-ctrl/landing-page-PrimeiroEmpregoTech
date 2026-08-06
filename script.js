@@ -34,7 +34,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function itemWidth() {
       var style = window.getComputedStyle(track);
       var gap = parseFloat(style.columnGap || style.gap || 0);
-      return items[0].getBoundingClientRect().width + gap;
+      // Usamos offsetWidth para pegar a largura real do elemento renderizado
+      return items[0].offsetWidth + gap;
     }
 
     function currentIndex() {

@@ -498,8 +498,6 @@ h3 {
   line-height: 1.6;
 }
 
-/* ===== PRODUCT ===== */
-
 .product-carousel-wrapper {
   display: flex;
   align-items: center;
@@ -530,6 +528,13 @@ h3 {
   background: var(--accent);
   color: #04140c;
   transform: scale(1.05);
+}
+
+/* Esconder setas no mobile */
+@media (max-width: 768px) {
+  .prod-nav-btn {
+    display: none !important;
+  }
 }
 
 .product-grid {
@@ -1191,17 +1196,35 @@ h3 {
 /* ===== FEEDBACK ===== */
 
 .feedback-grid {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.25rem;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 1.5rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 1rem 0;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
+.feedback-grid::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
 }
 
 .feedback-card {
+  flex: 0 0 300px; /* Largura fixa para os itens do carrossel */
+  scroll-snap-align: center;
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--border);
   background: var(--card);
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 480px) {
+  .feedback-card {
+    flex: 0 0 85%; /* No mobile, mostra quase a imagem toda */
+  }
 }
 
 .feedback-img {
@@ -1350,6 +1373,10 @@ footer {
     font-size: 0.8rem;
     flex-wrap: wrap;
     justify-content: center;
+  }
+
+  .prod-nav-btn {
+    display: none !important;
   }
 }
 
