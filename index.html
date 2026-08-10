@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Primeiro Emprego Tech | O Método Definitivo para sua Primeira Vaga</title>
+  <title>Primeiro Emprego Tech</title>
   <meta name="description"
     content="Transforme seus estudos em programação em um portfólio estratégico, currículo ATS e perfil no LinkedIn prontos para contratar.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,6 +13,7 @@
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
   <!-- Fallback: se o JavaScript não carregar por algum motivo, o script.js nunca
        adiciona a classe .active nos elementos .reveal, e eles ficariam com
@@ -31,8 +32,31 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Primeiro Emprego Tech | O Método Definitivo">
   <meta property="og:description" content="Transforme seus estudos em um perfil profissional que atrai recrutadores.">
-  <meta property="og:image" content="image/livrosOferta.png">
+  <meta property="og:image" content="image/livrosOferta.webp">
   <meta name="twitter:card" content="summary_large_image">
+
+  <!-- ============ META PIXEL ============ -->
+  <!-- Troque SEU_PIXEL_ID_AQUI pelo ID do seu Pixel assim que criar a conta
+       de anúncios no Meta Business (Eventos > Fontes de Dados > seu Pixel). -->
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ?
+        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'SEU_PIXEL_ID_AQUI');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=SEU_PIXEL_ID_AQUI&ev=PageView&noscript=1" alt="">
+  </noscript>
 </head>
 
 <body>
@@ -1243,6 +1267,8 @@
         <p>© 2026 Primeiro Emprego Tech. Todos os direitos reservados.</p>
         <p>Este é um produto educacional desenvolvido para preparar você para o mercado de forma estratégica. Não
           garantimos promessas irrealistas de contratação imediata sem esforço do aluno.</p>
+        <p><a href="privacidade.html" style="color:var(--accent);text-decoration:underline;">Política de Privacidade</a>
+        </p>
       </div>
     </div>
   </footer>

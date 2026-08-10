@@ -4,6 +4,8 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   /* ---------- Carrossel genérico (produtos e depoimentos) ---------- */
   // prevId e nextId são opcionais: o carrossel de produtos não tem setas,
   // só dots e scroll manual. O de depoimentos tem os dois.
@@ -22,9 +24,18 @@ document.addEventListener('DOMContentLoaded', function () {
     // gera os dots
     items.forEach(function (_, i) {
       var dot = document.createElement('span');
+      dot.setAttribute('role', 'button');
+      dot.setAttribute('tabindex', '0');
+      dot.setAttribute('aria-label', 'Ir para o item ' + (i + 1));
       if (i === 0) dot.classList.add('active');
       dot.addEventListener('click', function () {
         scrollToIndex(i);
+      });
+      dot.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          scrollToIndex(i);
+        }
       });
       dotsWrap.appendChild(dot);
     });
@@ -51,7 +62,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function scrollToIndex(i) {
       var clamped = Math.max(0, Math.min(i, items.length - 1));
-      track.scrollTo({ left: clamped * itemWidth(), behavior: 'smooth' });
+      track.scrollTo({
+        left: clamped * itemWidth(),
+        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+      });
     }
 
     if (prevBtn) {
@@ -92,10 +106,11 @@ document.addEventListener('DOMContentLoaded', function () {
     question.addEventListener('click', function () {
       var isOpen = item.classList.contains('open');
 
-      // fecha os outros itens abertos
+      // fecha os outros itens abertos (garante só um aberto por vez)
       faqItems.forEach(function (other) {
         if (other !== item) {
           other.classList.remove('open');
+          other.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
           other.querySelector('.faq-a').style.maxHeight = null;
         }
       });
@@ -112,10 +127,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  /* ---------- Contador de urgência (reinicia a cada carregamento) ---------- */
+  /* ---------- Contador de urgência ---------- */
   // Atualiza TODOS os elementos com a classe .js-countdown ao mesmo tempo,
   // para que o cronômetro do banner e o de dentro da oferta fiquem sempre
-  // sincronizados, mostrando o mesmo tempo restante.
+  // sincronizados, mostrando o mesmo tempo restante. Persiste no
+  // localStorage para não ser um "falso" contador que reinicia sozinho
+  // a cada recarregamento da página.
   var countdownEls = document.querySelectorAll('.js-countdown');
 
   if (countdownEls.length) {
@@ -125,8 +142,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function getInitialTimer() {
       var saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
-        var diff = Math.floor((Date.now() - parseInt(saved)) / 1000);
-        if (diff < DURATION) return DURATION - diff;
+        var diff = Math.floor((Date.now() - parseInt(saved, 10)) / 1000);
+        if (diff >= 0 && diff < DURATION) return DURATION - diff;
       }
       localStorage.setItem(STORAGE_KEY, Date.now().toString());
       return DURATION;
@@ -161,27 +178,38 @@ document.addEventListener('DOMContentLoaded', function () {
   // Sem isso, o observer continua rodando pra sempre em TODO elemento .reveal
   // da página (dezenas deles), o que pesa a rolagem e atrasa a percepção
   // de carregamento das imagens que vêm logo depois na página.
+  // Se a pessoa pediu "reduzir movimento" no sistema, mostramos tudo
+  // direto, sem observer e sem animação de entrada.
   var reveals = document.querySelectorAll('.reveal');
 
   if (reveals.length) {
-    var revealObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-          revealObserver.unobserve(entry.target);
-        }
+    if (prefersReducedMotion) {
+      reveals.forEach(function (el) {
+        el.classList.add('active');
       });
-    }, {
-      threshold: 0.15,
-      rootMargin: '0px 0px -50px 0px'
-    });
+    } else {
+      var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      });
 
-    reveals.forEach(function (el) {
-      revealObserver.observe(el);
-    });
+      reveals.forEach(function (el) {
+        revealObserver.observe(el);
+      });
+    }
   }
 
   /* ---------- Vídeo do hero (toca só quando a pessoa clica) ---------- */
+  // Só existe se a página tiver #heroVideo com data-video-src (o vídeo
+  // foi retirado temporariamente do HTML, então este bloco fica inativo
+  // até ele voltar, sem gerar erro).
   var heroVideo = document.getElementById('heroVideo');
   var heroVideoPlay = document.getElementById('heroVideoPlay');
 
@@ -195,10 +223,27 @@ document.addEventListener('DOMContentLoaded', function () {
       video.controls = true;
       video.autoplay = true;
       video.playsInline = true;
+      video.preload = 'none';
 
       heroVideo.innerHTML = '';
       heroVideo.appendChild(video);
       heroVideo.style.cursor = 'default';
+    });
+  }
+
+  /* ---------- Meta Pixel: evento de início de checkout ---------- */
+  // Dispara quando a pessoa clica em qualquer botão de compra (.buy-btn).
+  // Só executa se o Pixel estiver carregado (fbq definido), então não dá
+  // erro caso o script do Pixel seja bloqueado ou ainda não tenha ID real.
+  var buyButtons = document.querySelectorAll('.buy-btn');
+
+  if (buyButtons.length) {
+    buyButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (typeof fbq === 'function') {
+          fbq('track', 'InitiateCheckout');
+        }
+      });
     });
   }
 
