@@ -2,6 +2,8 @@
    PRIMEIRO EMPREGO TECH — styles.css
    ========================================================= */
 
+/* ===== BASE / RESET (variáveis, tipografia e elementos globais) ===== */
+
 :root {
   --bg: #0b0d10;
   --bg-alt: #12151a;
@@ -289,6 +291,13 @@ h3 {
   max-width: 720px;
   width: 100%;
   margin: 0 auto;
+  animation: heroFloat 5s ease-in-out infinite;
+}
+
+@keyframes heroFloat {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0px); }
 }
 
 .hero-image-glow {
@@ -433,37 +442,80 @@ h3 {
 
 .benefit-card {
   display: flex;
-  align-items: flex-start;
-  gap: 1.25rem;
-  background: var(--card);
+  align-items: center;
+  gap: 1.5rem;
+  background: rgba(23, 26, 33, 0.6);
+  backdrop-filter: blur(10px);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 1.5rem;
   text-align: left;
-  transition: transform .15s ease, border-color .15s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.benefit-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top left, rgba(61, 220, 151, 0.05), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .benefit-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--accent);
+  transform: translateY(-6px);
+  border-color: rgba(61, 220, 151, 0.3);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  background: rgba(23, 26, 33, 0.8);
+}
+
+.benefit-card:hover::before {
+  opacity: 1;
 }
 
 .benefit-icon {
-  width: 52px;
-  height: 52px;
+  width: 64px;
+  height: 64px;
   flex-shrink: 0;
-  border-radius: 14px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(61, 220, 151, .12);
-  color: var(--accent);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  transition: all 0.3s ease;
 }
 
-.benefit-icon svg {
-  width: 24px;
-  height: 24px;
+.benefit-card:hover .benefit-icon {
+  background: rgba(61, 220, 151, 0.08);
+  border-color: rgba(61, 220, 151, 0.2);
+  box-shadow: 0 0 20px rgba(61, 220, 151, 0.1);
 }
+
+.floating-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Brilhos específicos para cada ícone no hover */
+.benefit-card:hover .icon-linkedin { box-shadow: 0 0 25px rgba(0, 119, 181, 0.2); }
+.benefit-card:hover .icon-github { box-shadow: 0 0 25px rgba(61, 220, 151, 0.2); }
+.benefit-card:hover .icon-curriculo { box-shadow: 0 0 25px rgba(168, 85, 247, 0.2); }
+.benefit-card:hover .icon-entrevistas { box-shadow: 0 0 25px rgba(251, 146, 60, 0.2); }
 
 .benefit-content h3 {
   font-size: 1.05rem;
@@ -497,6 +549,8 @@ h3 {
   margin: 0 auto;
   line-height: 1.6;
 }
+
+/* ===== PRODUTO (carrossel do kit / livros) ===== */
 
 .product-carousel-wrapper {
   display: flex;
@@ -538,22 +592,43 @@ h3 {
 }
 
 .product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   gap: 1.5rem;
-  justify-content: center;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 1.5rem 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  perspective: 1200px;
 }
 
-/* Grid de Produtos Estático */
+.product-grid::-webkit-scrollbar {
+  display: none;
+}
+
 .product-card {
+  flex: 0 0 320px;
+  scroll-snap-align: center;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 1.25rem;
+  padding: 1.5rem;
   position: relative;
-  margin: 0 auto;
   overflow: hidden;
-  transition: transform .15s ease, border-color .15s ease;
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+  animation: floatBook 6s ease-in-out infinite;
+}
+
+.product-card:nth-child(odd) { animation-delay: 0s; }
+.product-card:nth-child(even) { animation-delay: 3s; }
+
+@keyframes floatBook {
+  0% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+  50% { transform: translateY(-8px) rotateX(2deg) rotateY(3deg); }
+  100% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
 }
 
 .product-card .product-img {
@@ -563,11 +638,20 @@ h3 {
   border-radius: var(--radius-sm);
   margin-bottom: 1rem;
   background: var(--bg-alt);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease;
 }
 
 .product-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-12px) rotateX(4deg) rotateY(6deg) scale(1.02);
   border-color: var(--accent);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(61, 220, 151, 0.25);
+}
+
+@media (max-width: 480px) {
+  .product-card {
+    flex: 0 0 85%;
+  }
 }
 
 .product-badge {
@@ -714,7 +798,7 @@ h3 {
   color: var(--text);
 }
 
-/* ===== OFFER ===== */
+/* ===== OFERTA ===== */
 
 .urgency-banner {
   display: flex;
@@ -1085,6 +1169,13 @@ h3 {
   display: flex;
   justify-content: center;
   margin-bottom: 1.5rem;
+  animation: badgeFloat 4s ease-in-out infinite;
+}
+
+@keyframes badgeFloat {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
 }
 
 .guarantee-section-badge img {
@@ -1193,7 +1284,7 @@ h3 {
   font-size: 1rem;
 }
 
-/* ===== FEEDBACK ===== */
+/* ===== DEPOIMENTOS (feedback) ===== */
 
 .feedback-grid {
   display: flex;
@@ -1392,7 +1483,30 @@ footer {
   .sticky-cta-inner {
     gap: .75rem;
   }
+
+  .benefit-card {
+    gap: 1rem;
+    padding: 1.15rem;
+  }
+
+  .benefit-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 14px;
+  }
+
+  .floating-icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .benefit-content p {
+    font-size: .88rem;
+    line-height: 1.45;
+  }
 }
+
+
 
 /* =========================================================
    ANIMATIONS (SCROLL REVEAL)

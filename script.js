@@ -87,6 +87,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+  // carrossel de produtos (livros)
+  initCarousel({
+    track: '.product-grid',
+    prevId: 'prodPrev',
+    nextId: 'prodNext',
+    dotsId: 'prodDots'
+  });
+
   // carrossel de depoimentos
   initCarousel({
     track: '.feedback-grid',
