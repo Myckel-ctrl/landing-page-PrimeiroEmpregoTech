@@ -296,7 +296,7 @@ h3 {
 
 @keyframes heroFloat {
   0% { transform: translateY(0px); }
-  50% { transform: translateY(-5px); }
+  50% { transform: translateY(-14px); }
   100% { transform: translateY(0px); }
 }
 
@@ -595,7 +595,7 @@ h3 {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
-  gap: 0.6rem;
+  gap: 1.5rem;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   padding: 1.5rem 0;
@@ -610,7 +610,7 @@ h3 {
 
 .product-card {
   flex: 0 0 320px;
-  scroll-snap-align: center;
+  scroll-snap-align: start;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
@@ -650,7 +650,7 @@ h3 {
 
 @media (max-width: 480px) {
   .product-card {
-    flex: 0 0 85%;
+    flex: 0 0 80%;
   }
 }
 
@@ -1304,7 +1304,7 @@ h3 {
 
 .feedback-card {
   flex: 0 0 300px; /* Largura fixa para os itens do carrossel */
-  scroll-snap-align: center;
+  scroll-snap-align: start;
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--border);
@@ -1314,7 +1314,7 @@ h3 {
 
 @media (max-width: 480px) {
   .feedback-card {
-    flex: 0 0 85%; /* No mobile, mostra quase a imagem toda */
+    flex: 0 0 80%; /* No mobile, deixa a borda do próximo card visível */
   }
 }
 
