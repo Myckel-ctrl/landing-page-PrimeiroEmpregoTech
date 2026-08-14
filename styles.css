@@ -838,7 +838,7 @@ h3 {
 .offer-header-img {
   display: flex;
   justify-content: center;
-  margin-bottom: -2.5rem;
+  margin-bottom: -1.5rem;
   position: relative;
   z-index: 2;
 }
@@ -905,8 +905,6 @@ h3 {
 
 .value-stack {
   margin-top: 1.5rem;
-  border-top: 1px dashed var(--border);
-  padding-top: 1rem;
 }
 
 .value-row {
@@ -1013,6 +1011,19 @@ h3 {
   border-radius: 999px;
   padding: .3rem .8rem;
   margin-bottom: .75rem;
+}
+
+.offer-item-price {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.offer-list li.bonus-item .offer-item-price {
+  color: var(--accent);
 }
 
 .offer-old-price {
