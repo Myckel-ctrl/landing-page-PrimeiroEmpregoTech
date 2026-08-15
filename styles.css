@@ -648,9 +648,9 @@ h3 {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(61, 220, 151, 0.25);
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .product-card {
-    flex: 0 0 80%;
+    flex: 0 0 78%;
   }
 }
 
@@ -1301,9 +1301,12 @@ h3 {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
+  overflow-y: hidden;
   gap: 1.5rem;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
   padding: 1rem 0;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* IE and Edge */
@@ -1316,6 +1319,8 @@ h3 {
 .feedback-card {
   flex: 0 0 300px; /* Largura fixa para os itens do carrossel */
   scroll-snap-align: start;
+  scroll-snap-stop: always;
+  touch-action: pan-x;
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--border);
@@ -1323,9 +1328,9 @@ h3 {
   transition: transform 0.3s ease;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .feedback-card {
-    flex: 0 0 80%; /* No mobile, deixa a borda do próximo card visível */
+    flex: 0 0 78%; /* No mobile, deixa a borda do próximo card visível */
   }
 }
 
