@@ -9,9 +9,17 @@
     content="Transforme seus estudos em programação em um portfólio estratégico, currículo ATS e perfil no LinkedIn prontos para contratar.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Fontes carregadas sem bloquear a renderização: o navegador baixa o CSS
+       em segundo plano (media="print") e troca para "all" quando termina.
+       O <noscript> garante que continue funcionando sem JS. -->
   <link
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
-    rel="stylesheet">
+    rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet">
+  </noscript>
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="image/favicon.svg" type="image/svg+xml">
 
@@ -41,29 +49,8 @@
   <meta name="twitter:description" content="Transforme seus estudos em um perfil profissional que atrai recrutadores.">
   <meta name="twitter:image" content="https://emprego-tech.vercel.app/image/livrosOferta.webp">
 
-  <!-- ============ META PIXEL ============ -->
-  <!-- Pixel do Meta Ads já configurado com o ID real (Primeiro Emprego Tech).
-       Eventos: fbq('track', 'PageView') dispara em toda visita; fbq('track',
-       'InitiateCheckout') dispara nos cliques dos botões .buy-btn (ver script.js). -->
-  <!-- Meta Pixel Code -->
-  <script>
-    !function (f, b, e, v, n, t, s) {
-      if (f.fbq) return; n = f.fbq = function () {
-        n.callMethod ?
-          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-      };
-      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
-      n.queue = []; t = b.createElement(e); t.async = !0;
-      t.src = v; s = b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t, s)
-    }(window, document, 'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '2864833017210216');
-    fbq('track', 'PageView');
-  </script>
   <noscript><img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=2864833017210216&ev=PageView&noscript=1" /></noscript>
-  <!-- End Meta Pixel Code -->
 </head>
 
 <body>
@@ -128,7 +115,7 @@
         <div class="hero-image-glow"></div>
 
         <img src="image/thumb.webp" alt="Apresentação do Kit Primeiro Emprego Tech" class="hero-video-thumb"
-          decoding="async">
+          decoding="async" fetchpriority="high">
 
       </div>
 
@@ -1180,6 +1167,28 @@
   </footer>
 
   <script src="script.js"></script>
+
+  <!-- ============ META PIXEL ============ -->
+  <!-- Movido para o fim do body: carrega depois do conteúdo visível, sem
+       atrasar a primeira renderização da página. Eventos continuam os
+       mesmos: PageView aqui, InitiateCheckout nos cliques (ver script.js). -->
+  <!-- Meta Pixel Code -->
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ?
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2864833017210216');
+    fbq('track', 'PageView');
+  </script>
+  <!-- End Meta Pixel Code -->
 
 </body>
 
