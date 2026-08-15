@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Primeiro Emprego Tech</title>
+  <title>Emprego Tech</title>
   <meta name="description"
     content="Transforme seus estudos em programação em um portfólio estratégico, currículo ATS e perfil no LinkedIn prontos para contratar.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,12 +13,8 @@
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-
-  <!-- Fallback: se o JavaScript não carregar por algum motivo, o script.js nunca
-       adiciona a classe .active nos elementos .reveal, e eles ficariam com
-       opacity:0 para sempre (invisíveis). Isso garante que o conteúdo apareça
-       mesmo sem JS. -->
+  <link rel="icon" href="image/favicon.svg" type="image/svg+xml">
+  
   <noscript>
     <style>
       .reveal {
@@ -32,21 +28,31 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Primeiro Emprego Tech | O Método Definitivo">
   <meta property="og:description" content="Transforme seus estudos em um perfil profissional que atrai recrutadores.">
-  <!-- IMPORTANTE: troque "https://seudominio.com.br" pelo domínio real onde a página
-       vai ficar publicada. O Facebook/WhatsApp/Twitter não conseguem resolver um
-       caminho relativo (ex: "image/livrosOferta.webp") ao gerar a prévia do link
-       compartilhado — a imagem precisa de uma URL absoluta. -->
-  <meta property="og:image" content="https://seudominio.com.br/image/livrosOferta.webp">
+  <meta property="og:url" content="https://myckel-ctrl.github.io/landing-page-PrimeiroEmpregoTech/">
+  <!-- A imagem precisa estar publicada exatamente nesse caminho absoluto. Depois de
+       publicar, teste abrindo a URL abaixo direto no navegador para confirmar que ela
+       carrega. Se trocar de domínio no futuro, atualize og:url e og:image juntos. -->
+  <meta property="og:image"
+    content="https://myckel-ctrl.github.io/landing-page-PrimeiroEmpregoTech/image/livrosOferta.webp"> <!-- adicionar outra url -->
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="pt_BR">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Primeiro Emprego Tech | O Método Definitivo">
+  <meta name="twitter:description" content="Transforme seus estudos em um perfil profissional que atrai recrutadores.">
+  <meta name="twitter:image"
+    content="https://myckel-ctrl.github.io/landing-page-PrimeiroEmpregoTech/image/livrosOferta.webp"> <!-- adicionar outra url -->
 
   <!-- ============ META PIXEL ============ -->
-  <!-- Troque SEU_PIXEL_ID_AQUI pelo ID do seu Pixel assim que criar a conta
-       de anúncios no Meta Business (Eventos > Fontes de Dados > seu Pixel). -->
+  <!-- Pixel do Meta Ads já configurado com o ID real (Primeiro Emprego Tech).
+       Eventos: fbq('track', 'PageView') dispara em toda visita; fbq('track',
+       'InitiateCheckout') dispara nos cliques dos botões .buy-btn (ver script.js). -->
+  <!-- Meta Pixel Code -->
   <script>
     !function (f, b, e, v, n, t, s) {
       if (f.fbq) return; n = f.fbq = function () {
         n.callMethod ?
-          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
       };
       if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
       n.queue = []; t = b.createElement(e); t.async = !0;
@@ -54,13 +60,12 @@
       s.parentNode.insertBefore(t, s)
     }(window, document, 'script',
       'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 'SEU_PIXEL_ID_AQUI');
+    fbq('init', '2864833017210216');
     fbq('track', 'PageView');
   </script>
-  <noscript>
-    <img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=SEU_PIXEL_ID_AQUI&ev=PageView&noscript=1" alt="">
-  </noscript>
+  <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=2864833017210216&ev=PageView&noscript=1" /></noscript>
+  <!-- End Meta Pixel Code -->
 </head>
 
 <body>
