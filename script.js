@@ -1,7 +1,5 @@
 // =========================================================
 // PRIMEIRO EMPREGO TECH — script.js
-// Versão simplificada: mesmo comportamento, menos código e
-// menos trabalho pra thread principal durante o carregamento.
 // =========================================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -117,27 +115,32 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(tick, 1000);
   }
 
-  /* ---------- Animações de Scroll Reveal ---------- */
+  /* ---------- Scroll Reveal ----------
+     Descendo → aparece e fica
+     Subindo (vindo do final) → some o que sai por baixo
+  ------------------------------------ */
+  document.querySelectorAll('.faq-item').forEach((el) => el.classList.add('reveal'));
+
   const reveals = document.querySelectorAll('.reveal');
 
   if (reveals.length) {
-    if (prefersReducedMotion) {
-      reveals.forEach((el) => el.classList.add('active'));
-    } else {
-      const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        } else if (entry.boundingClientRect.top > 0) {
+          entry.target.classList.remove('active');
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
 
-      reveals.forEach((el) => revealObserver.observe(el));
-    }
+    reveals.forEach((el) => revealObserver.observe(el));
   }
 
-  /* ---------- Vídeo do hero (toca só quando a pessoa clica) ---------- */
+  /* ---------- Vídeo do hero ---------- */
   const heroVideo = document.getElementById('heroVideo');
   const heroVideoPlay = document.getElementById('heroVideoPlay');
 
@@ -155,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ---------- Meta Pixel: evento de início de checkout ---------- */
+  /* ---------- Meta Pixel ---------- */
   document.querySelectorAll('.buy-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
       if (typeof fbq === 'function') fbq('track', 'InitiateCheckout');
